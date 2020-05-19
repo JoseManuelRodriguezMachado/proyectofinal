@@ -17,7 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import modelo.Empleado;
 import modelo.modeloEmpleado;
-import vista.Interfaz;
+import vista.InterfazPrincipal;
 import vista.InterfazEmpleado;
 
 /**
@@ -58,18 +58,23 @@ public class controladorEmpleado implements ActionListener,MouseListener {
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonAsociar.setActionCommand( "jButtonAsociar" );
         this.vistaEmpleados.jButtonAsociar.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonCrearEmpleado.setActionCommand( "jButtonCrearEmpleado" );
         this.vistaEmpleados.jButtonCrearEmpleado.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonEliminarEmpleado.setActionCommand( "jButtonEliminarEmpleado" );
         this.vistaEmpleados.jButtonEliminarEmpleado.addActionListener(this);
+       
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonModificarEmpleado.setActionCommand( "jButtonModificarEmpleado" );
         this.vistaEmpleados.jButtonModificarEmpleado.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonListarProyectos.setActionCommand( "jButtonListarProyectos" );
         this.vistaEmpleados.jButtonListarProyectos.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaEmpleados.jButtonVolver.setActionCommand( "jButtonVolver" );
         this.vistaEmpleados.jButtonVolver.addActionListener(this);
@@ -77,6 +82,7 @@ public class controladorEmpleado implements ActionListener,MouseListener {
         //añade e inicia el jtable 
         this.vistaEmpleados.jTableEmpleados.addMouseListener(this);
         this.vistaEmpleados.jTableEmpleados.setModel(me.getTablaEmpleado());
+       
         //añade e inicia el jtable
         this.vistaEmpleados.jTableProyectos.addMouseListener(this);
         this.vistaEmpleados.jTableProyectos.setModel( new DefaultTableModel() );
@@ -84,6 +90,7 @@ public class controladorEmpleado implements ActionListener,MouseListener {
         //añade e inicia el combobox con los nombres de los empleados
         this.vistaEmpleados.jCBEmpleados.addMouseListener(this);
         this.vistaEmpleados.jCBEmpleados.setModel(me.getComboBoxEmpleados());
+       
         //añade e inicia el combobox con los nombres de los proyectos
         this.vistaEmpleados.jCBProyectos.addMouseListener(this);
         this.vistaEmpleados.jCBProyectos.setModel(me.getComboBoxProyectos());
@@ -104,7 +111,7 @@ public class controladorEmpleado implements ActionListener,MouseListener {
             if ( this.me.NuevoEmpleado(em))
             {
                 this.vistaEmpleados.jTableEmpleados.setModel( this.me.getTablaEmpleado());
-                JOptionPane.showMessageDialog(vistaEmpleados,"Exito: Nuevo registro agregado.");
+                JOptionPane.showMessageDialog(vistaEmpleados,"Exito: Nuevo Empleado agregado.");
                 this.vistaEmpleados.jFormattedTextFieldNombre.setText("");
                 this.vistaEmpleados.jFormattedTextFieldApellidos.setText("");
                 this.vistaEmpleados.jFormattedTextFieldNIF.setText("");
@@ -159,10 +166,10 @@ public class controladorEmpleado implements ActionListener,MouseListener {
                 break;  
             case jButtonListarProyectos:
                 //obtiene del modeloProyectos los registros en un DefaultTableModel y lo asigna en la vista
-                this.vistaEmpleados.jTableProyectos.setModel(this.me.getTablaProyecto(String.valueOf(this.vistaEmpleados.jCBEmpleados.getSelectedItem())));
+                this.vistaEmpleados.jTableProyectos.setModel(this.me.getTablaProyecto(this.vistaEmpleados.jCBEmpleados.getSelectedItem().toString()));
                 break;
             case jButtonVolver:
-                new controlador(new Interfaz()).iniciar();
+                new controlador(new InterfazPrincipal()).iniciar();
                 this.vistaEmpleados.dispose();
                 break;
         }

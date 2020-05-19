@@ -47,7 +47,8 @@ public class modeloProyecto extends Conexion {
     Object[][] data = new String[registros][4];
       try{
           //realizamos la consulta sql y llenamos los datos en la matriz "Object[][] data"
-         PreparedStatement pstm = this.getConnection().prepareStatement("SELECT * FROM Empleado e JOIN Riot r, Proyecto p WHERE r.p_titulo = p.p_titulo GROUP BY e.e_nif = r.e_nif");
+         PreparedStatement pstm = this.getConnection().prepareStatement("SELECT * FROM Empleado WHERE e_nif = ANY (SELECT e_nif FROM Riot WHERE p_titulo LIKE (?))");
+         pstm.setString(1, titulo);
          ResultSet res = pstm.executeQuery();
          int i=0;
          while(res.next()){
@@ -173,12 +174,4 @@ public class modeloProyecto extends Conexion {
         return res;
     }
     
-    /*public boolean validarCreacion(int n) {
-        LocalDate fecha_inicio = LocalDate.now();
-        if (n < fecha_inicio.getYear()){
-            return true;
-        }else{
-            return false;
-        }
-    }*/
 }

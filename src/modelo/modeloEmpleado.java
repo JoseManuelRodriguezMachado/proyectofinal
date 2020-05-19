@@ -66,7 +66,7 @@ public class modeloEmpleado extends Conexion {
         return tablaEmpleado;
     }
     
-    public DefaultTableModel getTablaProyecto(String nombre)
+    public DefaultTableModel getTablaProyecto(String nif)
     {
       DefaultTableModel tablaProyecto = new DefaultTableModel();
       int registros = 0;
@@ -86,7 +86,8 @@ public class modeloEmpleado extends Conexion {
     Object[][] data = new String[registros][4];
       try{
           //realizamos la consulta sql y llenamos los datos en la matriz "Object[][] data"
-         PreparedStatement pstm = this.getConnection().prepareStatement("SELECT * FROM Proyecto");
+         PreparedStatement pstm = this.getConnection().prepareStatement("SELECT * FROM Proyecto WHERE p_titulo = ANY (SELECT p_titulo FROM Riot WHERE e_nif LIKE (?))");
+         pstm.setString(1, nif);
          ResultSet res = pstm.executeQuery();
          int i=0;
          while(res.next()){
@@ -106,16 +107,16 @@ public class modeloEmpleado extends Conexion {
     }
     
     public DefaultComboBoxModel getComboBoxEmpleados(){
-      String nombre;
+      String nif;
       DefaultComboBoxModel cbm = new DefaultComboBoxModel();
 	ArrayList<String> elementos=new ArrayList<String>();
 	try {
 	getConnection();
-	PreparedStatement pstm = getConnection().prepareStatement("SELECT e_nombre FROM Empleado");
+	PreparedStatement pstm = getConnection().prepareStatement("SELECT e_nif FROM Empleado");
 	ResultSet res = pstm.executeQuery();
 	while (res.next()) {
-	nombre = res.getString("e_nombre");
-	elementos.add(nombre);
+	nif = res.getString("e_nif");
+	elementos.add(nif);
 	}
 	pstm.close();
 	} catch (Exception e) {

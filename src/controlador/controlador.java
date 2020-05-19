@@ -12,7 +12,7 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import vista.Interfaz;
+import vista.InterfazPrincipal;
 import vista.InterfazEmpleado;
 import vista.InterfazProyecto;
 
@@ -22,7 +22,7 @@ import vista.InterfazProyecto;
  */
 public class controlador implements ActionListener,MouseListener{
     
-    Interfaz vista;
+    InterfazPrincipal vista;
 
     public enum AccionMVC
     {
@@ -31,7 +31,7 @@ public class controlador implements ActionListener,MouseListener{
         jButtonSalir
     }
     
-    public controlador( Interfaz vista )
+    public controlador( InterfazPrincipal vista )
     {
         this.vista = vista;
     }
@@ -45,11 +45,11 @@ public class controlador implements ActionListener,MouseListener{
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {}
 
         //declara una acción y añade un escucha al evento producido por el componente
-        this.vista.jButtonEmpleados.setActionCommand( "jButtonEmpleados" );
-        this.vista.jButtonEmpleados.addActionListener(this);
+        this.vista.jButtonEmpleado.setActionCommand( "jButtonEmpleados" );
+        this.vista.jButtonEmpleado.addActionListener(this);
         //declara una acción y añade un escucha al evento producido por el componente
-        this.vista.jButtonProyectos.setActionCommand( "jButtonProyectos" );
-        this.vista.jButtonProyectos.addActionListener(this);
+        this.vista.jButtonProyecto.setActionCommand( "jButtonProyectos" );
+        this.vista.jButtonProyecto.addActionListener(this);
         //declara una acción y añade un escucha al evento producido por el componente
         this.vista.jButtonSalir.setActionCommand( "jButtonSalir" );
         this.vista.jButtonSalir.addActionListener(this);

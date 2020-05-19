@@ -17,7 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import modelo.Proyecto;
 import modelo.modeloProyecto;
-import vista.Interfaz;
+import vista.InterfazPrincipal;
 import vista.InterfazProyecto;
 
 /**
@@ -57,22 +57,27 @@ public class controladorProyecto implements ActionListener,MouseListener {
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaProyecto.jButtonCrearProyecto.setActionCommand( "jButtonCrearProyecto" );
         this.vistaProyecto.jButtonCrearProyecto.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaProyecto.jButtonEliminarProyecto.setActionCommand( "jButtonEliminarProyecto" );
         this.vistaProyecto.jButtonEliminarProyecto.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaProyecto.jButtonModificarProyecto.setActionCommand( "jButtonModificarProyecto" );
         this.vistaProyecto.jButtonModificarProyecto.addActionListener(this);
+        
         //declara una acción y añade un escucha al evento producido por el componente
-        this.vistaProyecto.jButtonListarEmpleados.setActionCommand( "jButtonListarempleados" );
-        this.vistaProyecto.jButtonEliminarProyecto.addActionListener(this);
+        this.vistaProyecto.jButtonListarEmpleados.setActionCommand( "jButtonListarEmpleados" );
+        this.vistaProyecto.jButtonListarEmpleados.addActionListener(this);
+       
         //declara una acción y añade un escucha al evento producido por el componente
         this.vistaProyecto.jButtonVolver.setActionCommand( "jButtonVolver" );
         this.vistaProyecto.jButtonVolver.addActionListener(this);
 
         //añade e inicia el jtable con un DefaultTableModel vacio
         this.vistaProyecto.jTableEmpleados.addMouseListener(this);
-        this.vistaProyecto.jTableEmpleados.setModel( mp.getTablaEmpleado(String.valueOf(this.vistaProyecto.jCBProyecto.getSelectedItem())));
+        this.vistaProyecto.jTableEmpleados.setModel( new DefaultTableModel());
+        
         //añade e inicia el jtable con un DefaultTableModel vacio
         this.vistaProyecto.jTableProyectos.addMouseListener(this);
         this.vistaProyecto.jTableProyectos.setModel( mp.getTablaProyecto() );
@@ -96,7 +101,7 @@ public class controladorProyecto implements ActionListener,MouseListener {
                 if ( this.mp.NuevoProyecto(pr))
                 {
                     this.vistaProyecto.jTableProyectos.setModel( this.mp.getTablaProyecto());
-                    JOptionPane.showMessageDialog(vistaProyecto,"Exito: Nuevo registro agregado.");
+                    JOptionPane.showMessageDialog(vistaProyecto,"Exito: Nuevo Proyecto agregado.");
                     this.vistaProyecto.jFormattedTextFieldTitulo.setText("");
                     this.vistaProyecto.jFormattedTextFieldInicio.setText("") ;
                     this.vistaProyecto.jFormattedTextFieldFinal.setText("");
@@ -110,7 +115,7 @@ public class controladorProyecto implements ActionListener,MouseListener {
                  if ( this.mp.EliminarProyecto(this.vistaProyecto.jFormattedTextFieldTitulo.getText() ) )
                 {
                     this.vistaProyecto.jTableProyectos.setModel( this.mp.getTablaProyecto());
-                    JOptionPane.showMessageDialog(vistaProyecto,"Exito: Empleado eliminado.");
+                    JOptionPane.showMessageDialog(vistaProyecto,"Exito: Proyecto eliminado.");
                     this.vistaProyecto.jFormattedTextFieldTitulo.setText("");
                     this.vistaProyecto.jFormattedTextFieldInicio.setText("") ;
                     this.vistaProyecto.jFormattedTextFieldFinal.setText("");
@@ -137,10 +142,10 @@ public class controladorProyecto implements ActionListener,MouseListener {
                 break; 
             case jButtonListarEmpleados:
                 //obtiene del modeloempleado los registros en un DefaultTableModel y lo asigna en la vista
-                this.vistaProyecto.jTableEmpleados.setModel(this.mp.getTablaEmpleado(String.valueOf(this.vistaProyecto.jCBProyecto.getSelectedItem())));
+                this.vistaProyecto.jTableEmpleados.setModel(this.mp.getTablaEmpleado(this.vistaProyecto.jCBProyecto.getSelectedItem().toString()));
                 break;
             case jButtonVolver:
-                new controlador(new Interfaz()).iniciar();
+                new controlador(new InterfazPrincipal()).iniciar();
                 this.vistaProyecto.dispose();
                 break;
         }

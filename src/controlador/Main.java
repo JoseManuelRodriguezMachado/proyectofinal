@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import vista.Interfaz;
+import vista.InterfazPrincipal;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Main {
     
     public static void main(String[] args){
         //ejecuta el controlador y este la vista
-        new controlador(new Interfaz()).iniciar();
+        new controlador(new InterfazPrincipal()).iniciar();
     }
      
 }

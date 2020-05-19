@@ -144,6 +144,8 @@ public class InterfazEmpleado extends javax.swing.JFrame {
                 "Nombre", "Apellidos", "Fecha nacimiento", "NIF"
             }
         ));
+        jTableEmpleados.getTableHeader().setResizingAllowed(false);
+        jTableEmpleados.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEmpleados);
 
         jLabelProyectos.setText("Proyectos :");
@@ -179,6 +181,8 @@ public class InterfazEmpleado extends javax.swing.JFrame {
                 "Titulo", "Fecha inicio", "Fecha final", "Descripcion"
             }
         ));
+        jTableProyectos.getTableHeader().setResizingAllowed(false);
+        jTableProyectos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableProyectos);
 
         jButtonVolver.setText("Volver");
